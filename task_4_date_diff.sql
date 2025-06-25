@@ -8,6 +8,7 @@ SELECT
     STR_TO_DATE(CONCAT(d.year, '-01-01'), '%Y-%m-%d'),
     CURRENT_DATE()
   ) AS years_diff
-FROM pandemic.infectious_data d
+FROM pandemic.normalized_cases d
 JOIN pandemic.entities e ON d.entity_id = e.id
 LIMIT 10;
+
