@@ -1,14 +1,8 @@
-DELIMITER $$
-
-CREATE FUNCTION get_years_diff(year_input INT)
-RETURNS INT
-DETERMINISTIC
-BEGIN
-    RETURN TIMESTAMPDIFF(
-        YEAR,
-        STR_TO_DATE(CONCAT(year_input, '-01-01'), '%Y-%m-%d'),
-        CURRENT_DATE()
-    );
-END $$
-
-DELIMITER ;
+SELECT
+    e.entity_name,
+    e.code,
+    d.year,
+    get_years_diff(d.year) AS years_diff
+FROM pandemic.normalized_cases d
+JOIN pandemic.entities e ON d.entity_id = e.id
+LIMIT 10;
